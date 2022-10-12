@@ -6,28 +6,63 @@ public class PictureTester
     {
     	//construct a Picture object from a jpg image on disk
         Picture beach = new Picture("beach.jpg"); 
+		Picture koala = new Picture("koala.jpg");
+		Picture lillies = new Picture("waterlilies.jpg");
+		Picture gorge = new Picture("gorge.jpg");
+		Picture bike = new Picture("redMotorcycle.jpg");
+		Picture temple = new Picture("temple.jpg");
+		Picture swan = new Picture("swan.jpg");
         
         beach.view(); //calling the view() method displays the picture with the PictureViewer GUI
         
         //PUT YOUR TESTS HERE
-		// beach.zeroBlue();
-		// beach.view();
+		beach.zeroBlue();
+		beach.view(); // pass
 
-		// beach.keepOnlyBlue();
-		// beach.view();
+		beach.keepOnlyBlue();
+		beach.view(); // pass
 
-		// beach.negate();
-		// beach.view();
+		koala.negate();
+		koala.view(); // pass
 
-		// beach.solarize(127);
-		// beach.view();
+		lillies.solarize(127);
+		lillies.view(); // pass
 
-		// beach.grayscale();
-		// beach.view();
+		gorge.grayscale();
+		gorge.view(); // pass
 
-		beach.tint(1.25, 0.75, 1);
-		beach.view();
-        
+        beach.tint(1.25, 0.75, 1);
+		beach.view(); // pass
+
+		lillies.posterize(63);
+		lillies.view(); // pass
+
+		bike.mirrorRightToLeft();
+		bike.view(); // pass
+
+		bike.mirrorHorizontal();
+		bike.view(); // pass
+
+		lillies.verticalFlip();
+		lillies.view(); // pass
+
+		temple.fixRoof();
+		temple.view(); // pass
+
+		swan.edgeDetection(25);
+		swan.view(); // pass
+
+		testChromakey(); // pass
+		testSteganography(); // fail
+
+		lillies.simpleBlur();
+		lillies.view(); // pass
+
+		lillies.blur(5);
+		lillies.view(); // fail
+
+		lillies.glassFilter(5);
+		lillies.view(); // fail
         
     }
     
