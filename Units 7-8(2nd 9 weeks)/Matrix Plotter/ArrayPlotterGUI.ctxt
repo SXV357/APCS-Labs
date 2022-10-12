@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.params=plotter
+comment0.target=ArrayPlotterGUI(ArrayPlotter)
+comment1.params=plotter
+comment1.target=void\ initialize(ArrayPlotter)
+comment2.params=
+comment2.target=edu.tag.grid.gui.nuggets.ColorChoiceMenu\ getDrawingColorChooser()
+comment3.params=grid
+comment3.target=void\ reactToNewGrid(info.gridworld.grid.Grid)
+comment3.text=Sets\ the\ grid\ in\ which\ to\ draw.
+comment4.params=ca
+comment4.target=void\ update(boolean[][])
+comment4.text=Updates\ the\ grid\ to\ reflect\ the\ state\ of\ the\ mirroring\ 2D\ array.
+comment5.params=
+comment5.target=void\ repaint()
+comment6.params=
+comment6.target=void\ sleep()
+comment7.params=
+comment7.target=void\ syncGridToArray()
+comment8.params=
+comment8.target=boolean[][]\ getColorArray()
+comment8.text=Gets\ the\ Array\ Plotter's\ colorArray\ instance\ variable.
+numComments=9

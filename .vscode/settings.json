@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "Units 7-8(2nd 9 weeks)/Matrix Plotter/gridgridworld.jar",
+        "Units 7-8(2nd 9 weeks)/Matrix Plotter/gridworld.jar"
+    ]
+}
