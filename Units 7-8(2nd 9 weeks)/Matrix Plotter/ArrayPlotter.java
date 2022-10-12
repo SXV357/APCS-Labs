@@ -385,12 +385,34 @@ public class ArrayPlotter
             clearGrid();  //We should always start with a clean grid.
             //Your solution should be here in the try block.
             //TO DO
-            for (int i = 0; i < colorArray.length; i++) {
-                for (int j = 0; j < colorArray[0].length; j++) {
-                    if (i == j) {
+            int row = 0;
+            int col = 0;
+            int m = colorArray.length;
+            int n = colorArray[0].length;
+            boolean up = true;
+            while (row < m && col < n) {
+                if (up) {
+                    for (int i = row, j = col; i >= 0 && j < n; i--, j++) {
                         colorArray[i][j] = true;
                         gui.update(colorArray);
                     }
+                    if (col < n - 1) {
+                        col++;
+                    } else {
+                        row++;
+                    }
+                    up = false;
+                } else {
+                    for (int i = row, j = col; i < m && j >= 0; i++, j--) {
+                        colorArray[i][j] = true;
+                        gui.update(colorArray);
+                    }
+                    if (row < m - 1) {
+                        row++;
+                    } else {
+                        col++;
+                    }
+                    up = true;
                 }
             }
 
