@@ -6,7 +6,7 @@ public class MapTester
 {
     public static void main(String[] args) throws IOException
     {        
-        MapIllustrator map = new MapIllustrator("C:/Users/14058/OneDrive/Desktop/AP CS Projects/Lab 06 - Mountain Climber/Colorado_480x480.txt");
+        MapIllustrator map = new MapIllustrator("C:/Users/14058/OneDrive/Desktop/Programming/AP CS Projects/Units 7-8(2nd 9 weeks)/Lab 06 - Mountain Climber/Colorado_480x480.txt");
         
         // construct DrawingPanel (the GUI that displays the map) - don't mess with this
         DrawingPanel panel = new DrawingPanel(map.getRows(), map.getCols());
@@ -15,11 +15,11 @@ public class MapTester
 		/*
 		 * add test code below
 		 */
-        System.out.println(map.getRows() + " " + map.getCols()); // pass
-        System.out.println(map.findMin() + " " + map.findMax()); // pass
-        map.drawMap(g); // pass
-        testDrawPath(map, g); // ??
-        testBestPath(map, g); // ??
+        System.out.println(map.getRows() + " " + map.getCols());
+        System.out.println(map.findMin() + " " + map.findMax());
+        map.drawMap(g);
+        testDrawPath(map, g);
+        testBestPath(map, g);
 		 
     }
     
