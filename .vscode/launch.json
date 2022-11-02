@@ -1,0 +1,49 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch DataRunner",
+            "request": "launch",
+            "mainClass": "DataRunner",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
+            "name": "Launch Factors",
+            "request": "launch",
+            "mainClass": "Factors",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
+            "name": "Launch MapTester",
+            "request": "launch",
+            "mainClass": "MapTester",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
+            "name": "Launch SieveOfEratosthenes",
+            "request": "launch",
+            "mainClass": "SieveOfEratosthenes",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
+            "name": "Launch TwoDRunner",
+            "request": "launch",
+            "mainClass": "TwoDRunner",
+            "projectName": "AP CS Projects_95ae710f"
+        }
+    ]
+}

@@ -6,6 +6,7 @@ class Cemetery {
 
     public Cemetery(String fileName) throws IOException{
         Scanner file = new Scanner(new File(fileName));
+		try {
         while(file.hasNextLine()){
             Scanner line = new Scanner(file.nextLine());
             String name = line.next();
@@ -15,6 +16,9 @@ class Cemetery {
             Tombstone tombstone = new Tombstone(name, burialDate, age, address);
             graves.add(tombstone);
         }
+	} catch (Exception e) {
+		System.out.println("Error:" + e);
+	}
     }
 
     //  takes the String version of a person's age (e.g. "11.5" or "22d") from the input file and return the (rounded) total number of days that person was alive when they were interred
