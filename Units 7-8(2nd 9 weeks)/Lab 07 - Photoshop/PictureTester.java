@@ -17,52 +17,52 @@ public class PictureTester
         
         //PUT YOUR TESTS HERE
 		beach.zeroBlue();
-		beach.view(); // pass
+		beach.view(); 
 
 		beach.keepOnlyBlue();
-		beach.view(); // pass
+		beach.view(); 
 
 		koala.negate();
-		koala.view(); // pass
+		koala.view(); 
 
 		lillies.solarize(127);
-		lillies.view(); // pass
+		lillies.view(); 
 
 		gorge.grayscale();
-		gorge.view(); // pass
+		gorge.view(); 
 
         beach.tint(1.25, 0.75, 1);
-		beach.view(); // pass
+		beach.view(); 
 
 		lillies.posterize(63);
-		lillies.view(); // pass
+		lillies.view(); 
 
 		bike.mirrorRightToLeft();
-		bike.view(); // pass
+		bike.view(); 
 
 		bike.mirrorHorizontal();
-		bike.view(); // pass
+		bike.view(); 
 
 		lillies.verticalFlip();
-		lillies.view(); // pass
+		lillies.view(); 
 
 		temple.fixRoof();
-		temple.view(); // pass
+		temple.view(); 
 
 		swan.edgeDetection(25);
-		swan.view(); // pass
+		swan.view(); 
 
-		testChromakey(); // pass
-		testSteganography(); // fail
+		testChromakey(); 
+		testSteganography(); 
 
 		lillies.simpleBlur();
-		lillies.view(); // pass
+		lillies.view(); 
 
 		lillies.blur(5);
-		lillies.view(); // fail
+		lillies.view(); 
 
 		lillies.glassFilter(5);
-		lillies.view(); // fail
+		lillies.view();
         
     }
     
