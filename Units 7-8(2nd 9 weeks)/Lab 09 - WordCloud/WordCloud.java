@@ -15,16 +15,14 @@ class WordCloud<Word> {
     }
 
     public void load(String fileName) throws FileNotFoundException{
-        Scanner input = new Scanner(new File(fileName));
-        while(input.hasNextLine()){
-            Scanner line = new Scanner(input.nextLine());
-            while(line.hasNext()){
-                String word = line.next();
-                words.add((Word) word);
-                totalWords++;
-            }
+        File file = new File(fileName);
+        Scanner input = new Scanner(file);
+        while(input.hasNext()){
+            String word = input.next();
+            words.add((Word) word);
+            totalWords++;
         }
-
+        input.close();
     }
 
     public ArrayList<Word> getTopHits(){
