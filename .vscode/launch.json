@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch CircleRunner",
+            "request": "launch",
+            "mainClass": "CircleRunner",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
+            "name": "Launch CemeteryRunner",
+            "request": "launch",
+            "mainClass": "CemeteryRunner",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
             "name": "Launch ArrayResizer",
             "request": "launch",
             "mainClass": "ArrayResizer",

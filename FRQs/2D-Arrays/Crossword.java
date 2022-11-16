@@ -7,10 +7,10 @@ public class Crossword {
         for (int r = 0; r < blackSquares.length; r++) {
             for (int c = 0; c < blackSquares[0].length; c++) {
                 if (blackSquares[r][c]) {
-                    puzzle[r][c] = new Square(false, 0);
+                    puzzle[r][c] = new Square(true, 0);
                 } else {
                     if (toBeLabeled(r, c, blackSquares)) {
-                        puzzle[r][c] = new Square(true, num);
+                        puzzle[r][c] = new Square(false, num);
                     } else {
                         puzzle[r][c] = new Square(false, 0);
                     }
