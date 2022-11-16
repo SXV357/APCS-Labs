@@ -2,30 +2,27 @@ import java.util.*;
 import java.io.*;
 
 class Cemetery {
-	private ArrayList<Tombstone> graves;
+	ArrayList<Tombstone> graves;
 
 	public Cemetery(String fileName) throws IOException {
 		Scanner file = new Scanner(new File(fileName));
-		try {
-			while (file.hasNextLine()) {
-				Scanner line = new Scanner(file.nextLine());
-				String name = line.next();
-				String burialDate = line.next();
-				int age = line.nextInt();
-				String address = line.next();
-				graves.add(new Tombstone(name, burialDate, age, address));
+		while (file.hasNextLine()) {
+			Scanner line = new Scanner(file.nextLine());
+			String name = "";
+			while (!line.hasNextInt()) {
+				name += line.next() + " ";
 			}
-			int numDays = 0;
-			for (int i = 0; i < graves.size(); i++) {
-				numDays += parseAge(String.valueOf(graves.get(i).getAge()));
+			String burialDate = line.next();
+			int age = line.nextInt();
+			String address = "";
+			while (line.hasNext()) {
+				address += line.next() + " ";
 			}
-			System.out.println("Average lifespan: " + numDays / 365 + "years");
-		} catch (Exception e) {
-			System.out.println("Error:" + e);
+			graves.add(new Tombstone(name, burialDate, age, address));
 		}
 	}
 
-	public static int parseAge(String ageString) {
+	public int parseAge(String ageString) {
 		if (ageString.contains("d")) { // age supplied in days
 			ageString = ageString.replaceAll("d", "");
 			return Integer.parseInt(ageString);

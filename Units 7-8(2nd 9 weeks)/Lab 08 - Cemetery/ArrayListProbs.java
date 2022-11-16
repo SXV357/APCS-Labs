@@ -96,4 +96,12 @@ class ArrayListProbs {
         }
         return list;
     }
+
+    public double bookstoreValue(Bookstore store){
+        double value = 0;
+        for (int i = 0; i < store.getBooks().size(); i++){
+            value += store.getBooks().get(i).getPrice();
+        }
+        return value;
+    }
 }
