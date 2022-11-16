@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch WordCloudRunner",
+            "request": "launch",
+            "mainClass": "WordCloudRunner",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
             "name": "Launch CircleRunner",
             "request": "launch",
             "mainClass": "CircleRunner",
