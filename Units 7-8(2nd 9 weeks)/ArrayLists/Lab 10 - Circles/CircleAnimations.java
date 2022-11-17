@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class CircleAnimations {
@@ -88,7 +87,7 @@ public class CircleAnimations {
 	}
 
 	void movingCircles() {
-		addCircles(100, 30);
+		addCircles(200, 35);
 		for (int i = 0; i < circles.size(); i++) {
 			circles.get(i).dx = rng.nextInt(5) + 1;
 			circles.get(i).dy = rng.nextInt(5) + 1;

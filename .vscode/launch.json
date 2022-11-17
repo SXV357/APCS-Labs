@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ArrayListProbsRunner",
+            "request": "launch",
+            "mainClass": "ArrayListProbsRunner",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
             "name": "Launch WordCloudRunner",
             "request": "launch",
             "mainClass": "WordCloudRunner",

@@ -6,7 +6,7 @@ public class CircleRunner {
 
 		//test your methods below (with the app object)
 		testCircleOverlap();
-		app.removeClicked();
+		app.movingCircles();
 
 
 //		testCircleOverlap(); //uncomment to test your overlap method, when required
