@@ -5,8 +5,8 @@ public class CircleRunner {
 		CircleAnimations app = new CircleAnimations(600); //supply window size, will be 600x600
 
 		//test your methods below (with the app object)
-		testCircleOverlap();
-		app.movingCircles();
+		// testCircleOverlap();
+		app.removeClicked();
 
 
 //		testCircleOverlap(); //uncomment to test your overlap method, when required

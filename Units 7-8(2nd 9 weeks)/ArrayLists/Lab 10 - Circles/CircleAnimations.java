@@ -87,7 +87,7 @@ public class CircleAnimations {
 	}
 
 	void movingCircles() {
-		addCircles(200, 35);
+		noOverlapping(100);
 		for (int i = 0; i < circles.size(); i++) {
 			circles.get(i).dx = rng.nextInt(5) + 1;
 			circles.get(i).dy = rng.nextInt(5) + 1;
@@ -101,11 +101,8 @@ public class CircleAnimations {
 	}
 
 	void removeClicked() {
-		addCircles(100, 30);
+		movingCircles();
 		while (true) {
-			StdDraw.clear();
-			drawCircles();
-			StdDraw.show(10);
 			if (StdDraw.isMousePressed()) {
 				int x = (int) StdDraw.mouseX();
 				int y = (int) StdDraw.mouseY();
