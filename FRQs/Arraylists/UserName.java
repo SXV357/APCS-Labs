@@ -24,7 +24,7 @@ public class UserName {
         for (int i = 0; i < possibleNames.size(); i++){
             if (isUsed(possibleNames.get(i), usedNames)){
                 possibleNames.remove(i); // remove item at that index
-                i--;
+                i++;
             }
         }
     }
