@@ -1,3 +1,4 @@
+package FRQs.Arraylists;
 import java.util.List;
 
 public class StringFormatter {
