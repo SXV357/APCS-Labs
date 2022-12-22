@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Runner",
+            "request": "launch",
+            "mainClass": "Runner",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
+            "name": "Launch AnimalHouseRunner",
+            "request": "launch",
+            "mainClass": "AnimalHouseRunner",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
             "name": "Launch InventoryRunner",
             "request": "launch",
             "mainClass": "InventoryRunner",
