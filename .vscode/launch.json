@@ -6,6 +6,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch InventoryRunner",
+            "request": "launch",
+            "mainClass": "InventoryRunner",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
+            "name": "Launch Scheduler",
+            "request": "launch",
+            "mainClass": "Scheduler",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
+            "name": "Launch CombinationLockTest",
+            "request": "launch",
+            "mainClass": "CombinationLockTest",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
+            "name": "Launch WordleSolverRunner",
+            "request": "launch",
+            "mainClass": "WordleSolverRunner",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
             "name": "Launch ArrayListProbsRunner",
             "request": "launch",
             "mainClass": "ArrayListProbsRunner",
