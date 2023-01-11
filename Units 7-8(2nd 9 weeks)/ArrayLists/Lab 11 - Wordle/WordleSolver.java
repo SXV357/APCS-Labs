@@ -8,19 +8,19 @@ class WordleSolver {
 
   private ArrayList<String> dictionary;
 
-  public WordleSolver(String filename) throws IOException{
+  public WordleSolver(String filename) throws IOException {
     this.dictionary = new ArrayList<String>();
     load(filename);
   }
 
-  public void load(String filename) throws FileNotFoundException{
+  void load(String filename) throws FileNotFoundException {
     Scanner file = new Scanner(new File(filename));
     while (file.hasNext()) {
       dictionary.add(file.next());
     }
   }
 
-  public void solve() {
+  void solve() {
     Scanner scanner = new Scanner(System.in);
     while (true) {
       System.out.print("Enter the word you typed into the game: ");
@@ -29,26 +29,29 @@ class WordleSolver {
         "Enter the result (X for Gray, Y for Yellow, G for Green): "
       );
       String result = scanner.nextLine().toUpperCase();
-
-      for (int i = dictionary.size() - 1; i >= 0; i--) {
+      for (int i = 0; i < dictionary.size(); i++) {
         String word = dictionary.get(i);
         for (int j = 0; j < word.length(); j++) {
           char c = word.charAt(j);
-          if (result.charAt(j) == 'G' && c != guess.charAt(j)) {
-            dictionary.remove(i);
-            break;
-          } else if (
-            result.charAt(j) == 'Y' && (c != guess.charAt(j) || c == 'X')
-          ) {
-            dictionary.remove(i);
-            break;
-          } else if (result.charAt(j) == 'X' && c == guess.charAt(j)) {
-            dictionary.remove(i);
-            break;
+          if (result.charAt(j) == 'G') {
+            if (word.indexOf(c) != guess.indexOf(guess.charAt(j))) {
+              dictionary.remove(dictionary.indexOf(word));
+            }
+          }           
+          else if (result.charAt(j) == 'Y') {
+            if (
+              c != guess.charAt(j) &&
+              word.indexOf(c) == guess.indexOf(guess.charAt(j))
+            ) {
+              dictionary.remove(dictionary.indexOf(word));
+            }
+          } else if (result.charAt(j) == 'X') {
+            if (c == guess.charAt(j)) {
+              dictionary.remove(dictionary.indexOf(word));
+            }
           }
         }
       }
-      scanner.close();
 
       System.out.println("Words left in the dictionary: " + dictionary);
 
