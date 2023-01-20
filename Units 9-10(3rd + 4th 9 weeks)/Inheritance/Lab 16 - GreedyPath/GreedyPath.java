@@ -1,58 +1,70 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class GreedyPath extends Path {
 
   private Point[] greedyPoints;
-  private ArrayList<Point> path;
   private double totalDistance;
 
-  public GreedyPath(String fileName) {
+  public GreedyPath(String fileName) throws FileNotFoundException {
     super(fileName);
+    this.greedyPoints = new Point[0];
     findPath();
-    path = new ArrayList<>();
-    greedyPoints = path.toArray(new Point[0]);
   }
 
   private void findPath() {
+    ArrayList<Point> path = new ArrayList<Point>();
     Point start = getPoint(0);
-    start.setVisited(true);
-    path.add(start);
+    if (start != null) {
+      start.setVisited(true);
+      path.add(start);
+    }
 
     while (path.size() < getPoints().length) {
-      Point current = path.get(path.size() - 1);
-      Point closest = getPoints()[0];
-      double minDistance = Double.MAX_VALUE;
-      for (Point point : getPoints()) {
-        if (!point.getVisited()) {
-          double distance = current.getDistance(point);
-          if (distance < minDistance) {
-            minDistance = distance;
+      if (path.size() > 0) {
+        Point current = path.get(path.size() - 1);
+        Point closest = getPoint(0);
+        double minDistance = Double.MAX_VALUE;
+        for (int i = 0; i < getPoints().length; i++) {
+          if (!getPoints()[i].getVisited()) {
+            double distance = current.getDistance(getPoints()[i]);
+            if (distance < minDistance) {
+              minDistance = distance;
+              closest = getPoints()[i];
+            }
           }
         }
+        if (closest != null) {
+          closest.setVisited(true);
+          path.add(closest);
+          this.totalDistance += minDistance;
+        }
       }
-      if (closest != null) {
-        closest.setVisited(true);
-        path.add(closest);
-        totalDistance += minDistance;
+
+      if (path.size() > 0) {
+        this.greedyPoints = path.toArray(new Point[0]);
       }
     }
-    greedyPoints = path.toArray(new Point[0]);
   }
 
   @Override
   public double getDistance() {
-    return totalDistance;
+    return this.totalDistance;
   }
 
   @Override
   public Point getPoint(int i) {
-    return greedyPoints[i];
+    if (this.greedyPoints.length > 0) {
+      return this.greedyPoints[i];
+    } else {
+      return null;
+    }
   }
 
   @Override
   public String toString() {
     String result = "";
-    for (Point point : greedyPoints) {
+    for (Point point : this.greedyPoints) {
       result += point.toString() + "\n";
     }
     return result;

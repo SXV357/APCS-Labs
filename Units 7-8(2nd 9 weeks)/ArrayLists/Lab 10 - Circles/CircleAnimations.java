@@ -101,7 +101,7 @@ public class CircleAnimations {
 	void removeClicked() {
 		movingCircles();
 		while (true) {
-			if (StdDraw.isMousePressed()) {
+			if (StdDraw.mousePressed()) {
 				int x = (int) StdDraw.mouseX();
 				int y = (int) StdDraw.mouseY();
 				for (int i = 0; i < circles.size(); i++) {

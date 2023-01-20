@@ -1,5 +1,5 @@
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Path {
@@ -9,12 +9,13 @@ public class Path {
   private double maxX, maxY; //maxes
 
   /** construct a path from a given file */
-  public Path(String fileName) {
-    try {
+  public Path(String fileName) throws FileNotFoundException{
+
       Scanner scanner = new Scanner(new File(fileName));
       int n = scanner.nextInt();
-      points = new Point[n];
+      points = new Point[n]; // initializing points to number of point pairs in the file
 
+      // initializing max and min values
       minX = Double.MAX_VALUE;
       minY = Double.MAX_VALUE;
       maxX = Double.MIN_VALUE;
@@ -23,16 +24,14 @@ public class Path {
       for (int i = 0; i < n; i++) {
         double x = scanner.nextDouble();
         double y = scanner.nextDouble();
-        points[i] = new Point(x, y);
+        points[i] = new Point(x, y); // adding point object using remaining x and y cord pairs in the file
 
+        // updating minimum and maximum values
         minX = Math.min(minX, x);
         minY = Math.min(minY, y);
         maxX = Math.max(maxX, x);
         maxY = Math.max(maxY, y);
       }
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
 
   /** returns the distance traveled going point to point, in order given in file */
@@ -50,10 +49,6 @@ public class Path {
 
   public Point[] getPoints() {
     return points;
-  }
-
-  public int getNumPoints() {
-    return points.length;
   }
 
   public double getMinX() {
