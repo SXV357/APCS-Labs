@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch World",
+            "request": "launch",
+            "mainClass": "World",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
             "name": "Launch DrawPath",
             "request": "launch",
             "mainClass": "DrawPath",
