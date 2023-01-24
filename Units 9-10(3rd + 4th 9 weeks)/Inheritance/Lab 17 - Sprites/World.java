@@ -1,8 +1,9 @@
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
+// import java.awt.Font;
+// import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
 public class World
 {
@@ -36,8 +37,13 @@ public class World
 	}
 
 	private void addSprites(){
-		StationarySprite sprite = new StationarySprite(100, 100, 100, 100, "C:/Users/14058/OneDrive/Desktop/Programming/AP CS Projects/Units 9-10(3rd + 4th 9 weeks)/Inheritance/Lab 17 - Sprites/square.png");
-		this.sprites.add(sprite);
+		// StationarySprite sprite = new StationarySprite(100, 100, 100, 100, "C:/Users/14058/OneDrive/Desktop/Programming/AP CS Projects/Units 9-10(3rd + 4th 9 weeks)/Inheritance/Lab 17 - Sprites/Images/square.png");
+		// this.sprites.add(sprite);
+		Random rand = new Random();
+		for(int i = 0; i < 10; i++){
+			ControllableSprite sprite2 = new ControllableSprite(rand.nextInt(600), rand.nextInt(600), 100, 100, "C:/Users/14058/OneDrive/Desktop/Programming/AP CS Projects/Units 9-10(3rd + 4th 9 weeks)/Inheritance/Lab 17 - Sprites/Images/circle.png", rand.nextInt(10), rand.nextInt(10));
+			this.sprites.add(sprite2);
+		}
 	}
 
 	/** ask all sprites in simulation to update themselves */
@@ -92,7 +98,7 @@ public class World
 
 	public static void main(String[] args)
 	{
-		World world = new World(600, 600);
+		World world = new World(600, 600);                                                                                                                                        
 		world.run();
 	}
-}
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           

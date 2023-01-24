@@ -12,18 +12,12 @@ public class BouncingSprite extends MobileSprite {
         super(x, y, width, height, image, vx, vy);
     }
 
-    private void bounce(World world){
-        if(this.getX() + this.getWidth() >= world.getWidth()){
-            this.setVX(-this.getVX());
+    public void bounce(World world){
+        if (getX() + getWidth() / 2 >= world.getWidth() || getX() - getWidth() / 2 <= 0) {
+            setVX(-1*getVX());
         }
-        if(this.getX() <= 0){
-            this.setVX(-this.getVX());
-        }
-        if(this.getY() + this.getHeight() >= world.getHeight()){
-            this.setVY(-this.getVY());
-        }
-        if(this.getY() <= 0){
-            this.setVY(-this.getVY());
+        if (getY() + getHeight() / 2 >= world.getHeight() || getY() - getHeight() / 2 <= 0) {
+            setVY(-1*getVY());
         }
     }
 
