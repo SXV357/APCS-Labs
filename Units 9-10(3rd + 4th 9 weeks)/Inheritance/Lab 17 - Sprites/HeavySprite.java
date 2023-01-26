@@ -15,6 +15,6 @@ public class HeavySprite extends BouncingSprite {
   @Override
   public void step(World world){
     super.step(world);
-    setVY(getVY() + 0.1);
+    super.setVY(super.getVY() + 0.1);
   }
 }

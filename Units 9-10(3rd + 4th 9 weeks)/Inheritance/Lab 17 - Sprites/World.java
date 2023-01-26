@@ -41,8 +41,8 @@ public class World
 		// this.sprites.add(sprite);
 		Random rand = new Random();
 		for(int i = 0; i < 10; i++){
-			ControllableSprite sprite2 = new ControllableSprite(rand.nextInt(600), rand.nextInt(600), 100, 100, "C:/Users/14058/OneDrive/Desktop/Programming/AP CS Projects/Units 9-10(3rd + 4th 9 weeks)/Inheritance/Lab 17 - Sprites/Images/circle.png", rand.nextInt(10), rand.nextInt(10));
-			this.sprites.add(sprite2);
+			ControllableSprite sprite = new ControllableSprite(rand.nextInt(600), rand.nextInt(600), 100, 100, "C:/Users/14058/OneDrive/Desktop/Programming/AP CS Projects/Units 9-10(3rd + 4th 9 weeks)/Inheritance/Lab 17 - Sprites/Images/circle.png", rand.nextInt(10), rand.nextInt(10));
+			this.sprites.add(sprite);
 		}
 	}
 

@@ -1,9 +1,3 @@
-// import java.awt.*;
-// import java.io.*;
-// import java.net.*;
-// import java.util.*;
-// import javax.imageio.*;
-
 public abstract class Sprite {
 
   private double x; //the x-coordinate of the center of the sprite
@@ -41,28 +35,10 @@ public abstract class Sprite {
 
   public boolean overlaps(Sprite other) {
     return (
-      (
-        this.getX() - this.getWidth() / 2 < other.getX() + other.getWidth() / 2
-      ) &&
-      (
-        other.getX() - other.getWidth() / 2 < this.getX() + this.getWidth() / 2
-      ) &&
-      (
-        this.getY() -
-        this.getHeight() /
-        2 <
-        other.getY() +
-        other.getHeight() /
-        2
-      ) &&
-      (
-        other.getY() -
-        other.getHeight() /
-        2 <
-        this.getY() +
-        this.getHeight() /
-        2
-      )
+      this.getX() - this.getWidth() / 2 < other.getX() + other.getWidth() / 2 &&
+      other.getX() - other.getWidth() / 2 < this.getX() + this.getWidth() / 2 &&
+      this.getY() - this.getHeight() / 2 < other.getY() + other.getHeight() / 2 &&
+      other.getY() - other.getHeight() / 2 < this.getY() + this.getHeight() / 2
     );
   }
 

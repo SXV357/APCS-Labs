@@ -35,7 +35,7 @@ public class MobileSprite extends Sprite {
 
     @Override
     public void step(World world) {
-        setX(getX() + this.getVX());
-        setY(getY() + this.getVY());
+        super.setX(super.getX() + this.getVX());
+        super.setY(super.getY() + this.getVY());
     }
 }
