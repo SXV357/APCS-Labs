@@ -8,10 +8,10 @@ public class DrawPath {
 
   public static void main(String[] args) throws IOException {
     final String file =
-      "C:/Users/14058/OneDrive/Desktop/Programming/AP CS Projects/Units 9-10(3rd + 4th 9 weeks)/Inheritance/Lab 16 - GreedyPath/points7.txt"; //change to try other files
+      "C:/Users/14058/OneDrive/Desktop/Programming/AP CS Projects/Units 9-10(3rd + 4th 9 weeks)/Inheritance/Lab 16 - GreedyPath/mona-100k.txt"; //change to try other files
     Path p = new GreedyPath(file);
 
-    final int delayMs = 0; // how long to wait, for animating the sequence of lines
+    final int delayMs = 20; // how long to wait, for animating the sequence of lines
 
     // First line should be the (x, y) of the lower-left coordinate of the bounding box
     double minX = p.getMinX();

@@ -14,23 +14,23 @@ public class GreedyPath extends Path {
 
   private void findPath() {
     ArrayList<Point> path = new ArrayList<Point>();
-    Point start = getPoint(0);
+    Point start = super.getPoint(0);
     if (start != null) {
       start.setVisited(true);
       path.add(start);
     }
 
-    while (path.size() < getPoints().length) {
+    while (path.size() < super.getPoints().length) {
       if (path.size() > 0) {
         Point current = path.get(path.size() - 1);
-        Point closest = getPoint(0);
+        Point closest = super.getPoint(0);
         double minDistance = Double.MAX_VALUE;
-        for (int i = 0; i < getPoints().length; i++) {
-          if (!getPoints()[i].getVisited()) {
+        for (int i = 0; i < super.getPoints().length; i++) {
+          if (!super.getPoints()[i].getVisited()) {
             double distance = current.getDistance(getPoints()[i]);
             if (distance < minDistance) {
               minDistance = distance;
-              closest = getPoints()[i];
+              closest = super.getPoints()[i];
             }
           }
         }
