@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Discardo",
+            "request": "launch",
+            "mainClass": "Discardo",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
+            "name": "Launch BotTester",
+            "request": "launch",
+            "mainClass": "BotTester",
+            "projectName": "AP CS Projects_95ae710f"
+        },
+        {
+            "type": "java",
             "name": "Launch World",
             "request": "launch",
             "mainClass": "World",
