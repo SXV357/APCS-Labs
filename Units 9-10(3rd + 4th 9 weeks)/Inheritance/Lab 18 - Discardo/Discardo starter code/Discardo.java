@@ -4,10 +4,8 @@ public class Discardo
 {
 	public static void main(String[] args) {
 		Discardo.test();
-
         // Discardo.play(new Human(), 4, new AllSameGoal(7));
         // Discardo.play(new Bot(),   3, new RunGoal());
-
 	}
 	
     public static void test()

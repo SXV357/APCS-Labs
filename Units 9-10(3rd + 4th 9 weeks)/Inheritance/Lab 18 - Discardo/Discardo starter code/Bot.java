@@ -11,101 +11,38 @@ public class Bot implements Player
 
     @Override
 	public void maybeReplaceCard(int card){
-        if (this.goal instanceof RunGoal){
-            if (this.goal.hasWon(this.hand)){
-                return;
-            }
-            else {
-                if (card == 1){
-                    int lowestCard = this.hand[0];
-                    int lowestCardIndex = 0;
-                    for (int i = 0; i < this.hand.length; i++){
-                        if (this.hand[i] < lowestCard){
-                            lowestCard = this.hand[i];
-                            lowestCardIndex = i;
-                        }
-                    }
-                    this.hand[lowestCardIndex] = card;
-                }
-                else if (card == 9){
-                    int highestCard = this.hand[0];
-                    int highestCardIndex = 0;
-                    for (int i = 0; i < this.hand.length; i++){
-                        if (this.hand[i] > highestCard){
-                            highestCard = this.hand[i];
-                            highestCardIndex = i;
-                        }
-                    }
-                    this.hand[highestCardIndex] = card;
-                }
-                else {
-                    int closestCard = this.hand[0];
-                    int closestCardIndex = 0;
-                    for (int i = 0; i < this.hand.length; i++){
-                        if (Math.abs(this.hand[i] - card) < Math.abs(closestCard - card)){
-                            closestCard = this.hand[i];
-                            closestCardIndex = i;
-                        }
-                    }
-                    this.hand[closestCardIndex] = card;
+        if (this.goal instanceof AllSameGoal){
+            AllSameGoal g = (AllSameGoal) this.goal;
+            int primaryGoal = g.primaryGoal;
+            int count = 0;
+            for (int i = 0; i < this.hand.length; i++){
+                if (this.hand[i] == primaryGoal){
+                    count++;
                 }
             }
-        }
-        
-        else if (this.goal instanceof AllSameGoal){
-            if (this.goal.hasWon(this.hand)){
-                return;
-            }
-            else {
-                int cardToReplace = this.hand[0];
-                int cardToReplaceIndex = 0;
+            if (count < this.hand.length){
                 for (int i = 0; i < this.hand.length; i++){
-                    if (this.hand[i] != card){
-                        cardToReplace = this.hand[i];
-                        cardToReplaceIndex = i;
+                    if (this.hand[i] != primaryGoal){
+                        this.hand[i] = card;
+                        break;
                     }
                 }
-                this.hand[cardToReplaceIndex] = card;
             }
-        }
-
-        else if (this.goal instanceof MultiGoal){
-            if (this.goal.hasWon(this.hand)){
-                return;
+        } else if (this.goal instanceof RunGoal){
+            RunGoal g = (RunGoal) this.goal;
+            int[] run = new int[hand.length];
+            int count = 0;
+            for (int i = 0; i < this.hand.length; i++){
+                if (this.hand[i] == run[i]){
+                    count++;
+                }
             }
-            else {
-                if (card == 1){
-                    int lowestCard = this.hand[0];
-                    int lowestCardIndex = 0;
-                    for (int i = 0; i < this.hand.length; i++){
-                        if (this.hand[i] < lowestCard){
-                            lowestCard = this.hand[i];
-                            lowestCardIndex = i;
-                        }
+            if (count < this.hand.length){
+                for (int i = 0; i < this.hand.length; i++){
+                    if (this.hand[i] != run[i]){
+                        this.hand[i] = card;
+                        break;
                     }
-                    this.hand[lowestCardIndex] = card;
-                }
-                else if (card == 9){
-                    int highestCard = this.hand[0];
-                    int highestCardIndex = 0;
-                    for (int i = 0; i < this.hand.length; i++){
-                        if (this.hand[i] > highestCard){
-                            highestCard = this.hand[i];
-                            highestCardIndex = i;
-                        }
-                    }
-                    this.hand[highestCardIndex] = card;
-                }
-                else {
-                    int closestCard = this.hand[0];
-                    int closestCardIndex = 0;
-                    for (int i = 0; i < this.hand.length; i++){
-                        if (Math.abs(this.hand[i] - card) < Math.abs(closestCard - card)){
-                            closestCard = this.hand[i];
-                            closestCardIndex = i;
-                        }
-                    }
-                    this.hand[closestCardIndex] = card;
                 }
             }
         }
