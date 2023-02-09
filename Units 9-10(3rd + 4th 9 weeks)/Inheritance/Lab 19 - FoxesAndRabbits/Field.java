@@ -1,7 +1,6 @@
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Field
 {    
@@ -15,13 +14,19 @@ public class Field
 	 */
 	public Field(int height, int width)
 	{
-		//TODO
+		this.height = height;
+		this.width = width;
+		this.field = new Object[height][width];
 	}
 
 	/** Empty the field */
 	public void clear()
 	{
-		//TODO
+		for (int i = 0; i < field.length; i++){
+			for (int j = 0; j < field[i].length; j++){
+				field[i][j] = null;
+			}
+		}
 	}
 
 	/**
@@ -32,9 +37,8 @@ public class Field
 	 * @param row Row coordinate of the location.
 	 * @param col Column coordinate of the location.
 	 */
-	public void place(Object animal, int row, int col)
-	{
-		//TODO
+	public void place(Object animal, int row, int col){
+		field[row][col] = animal;
 	}
 
 	/**
@@ -44,9 +48,8 @@ public class Field
 	 * @param animal The animal to be placed.
 	 * @param location Where to place the animal.
 	 */
-	public void place(Object animal, Location location)
-	{
-		//TODO
+	public void place(Object animal, Location location){
+		place(animal, location.getRow(), location.getCol());
 	}
 	
 	/**
@@ -54,18 +57,18 @@ public class Field
 	 * @param oldLocation Object's old location
 	 * @param newLocation Object's new location
 	 */
-	public void move(Location oldLocation, Location newLocation)
-	{
-		//TODO
+	public void move(Location oldLocation, Location newLocation){
+		Object obj = getObjectAt(oldLocation);
+		place(obj, newLocation);
+		remove(oldLocation);
 	}
 	
 	/**
 	 * Remove an Object from a particular location
 	 * @param location
 	 */
-	public void remove(Location location)
-	{
-		//TODO
+	public void remove(Location location){
+		field[location.getRow()][location.getCol()] = null;
 	}
 	
 	/**
@@ -75,9 +78,7 @@ public class Field
 	 */
 	public Object getObjectAt(Location location)
 	{
-		//TODO
-		
-		return null;
+		return field[location.getRow()][location.getCol()];
 	}
 
 	/**
@@ -88,9 +89,7 @@ public class Field
 	 */
 	public Object getObjectAt(int row, int col)
 	{
-		//TODO
-		
-		return null;
+		return field[row][col];
 	}
 
 	/**
@@ -99,11 +98,20 @@ public class Field
 	 * @param location The location from which to generate adjacencies.
 	 * @return A randomized list of locations adjacent to that given.
 	 */
-	public List<Location> adjacentLocations(Location location)
-	{
-		//TODO
-		
-		return null;
+	public List<Location> adjacentLocations(Location location){
+		List<Location> locations = new ArrayList<Location>();
+		int row = location.getRow();
+		int col = location.getCol();
+
+		for (int r = row - 1; r <= row + 1; r++){
+			for (int c = col - 1; c <= col + 1; c++){
+				if (r >= 0 && r < this.height && c >= 0 && c < this.width && !(r == row && c == col)){
+					locations.add(new Location(r, c));
+				}
+			}
+		}
+		Collections.shuffle(locations);
+		return locations;
 	}
 
 	/**
@@ -114,16 +122,14 @@ public class Field
 	 * @return A valid free location within the grid area, or null if all
 	 *         locations around are full.
 	 */
-	public Location freeAdjacentLocation(Location location)
-	{
-		//USED BY FOXES AND RABBITS TO MOVE RANDOMLY
-		
-		/*
-		 * TODO
-		 */
-		
+	public Location freeAdjacentLocation(Location location){
+		List<Location> locations = adjacentLocations(location);
+		for (Location loc : locations){
+			if (getObjectAt(loc) == null){
+				return loc;
+			}
+		}
 		return null;
-			
 	}
 
 	@Override
