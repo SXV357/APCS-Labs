@@ -33,12 +33,12 @@ public class FieldTester
 		System.out.println(field); //rabbit should show in new location, be removed from old
 		
 		System.out.println("Rabbit runs:");
-		rabbit.run();
+		rabbit.act();
 		
 		System.out.println(field); //rabbit should move to a free adjacent location
 		
 		System.out.println("Fox hunts:");
-		fox.hunt(); 
+		fox.act(); 
 		
 		//fox should eat rabbit if rabbit moved near fox, otherwise move randomly
 		//  run multiple times to check

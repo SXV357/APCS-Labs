@@ -33,8 +33,8 @@ public class Simulator {
    * @param width Width of the field. Must be greater than zero.
    */
   public Simulator(int height, int width) {
-    field = new Field(height, width);
-    step = 0;
+    this.field = new Field(height, width);
+    this.step = 0;
 
     // Create a view of the state of each location in the field, don't mess with this
     view = new SimulatorView(height, width);
@@ -76,11 +76,12 @@ public class Simulator {
       for (int i = 0; i < this.field.getWidth(); i++) {
         for (int j = 0; j < this.field.getHeight(); j++) {
           Location loc = new Location(i, j);
-          Object current = this.field.getObjectAt(loc);
+          // Object current = this.field.getObjectAt(loc);
+          Animal current = this.field.getObjectAt(loc);
           if (current instanceof Rabbit) {
-            ((Rabbit) current).run();
+            ((Rabbit) current).act();
           } else if (current instanceof Fox) {
-            ((Fox) current).hunt();
+            ((Fox) current).act();
           }
         }
       }
@@ -108,18 +109,19 @@ public class Simulator {
    */
   private void populate() {
     Random rand = new Random();
-    field.clear();
+    this.field.clear();
     for (int i = 0; i < field.getWidth(); i++) {
       for (int j = 0; j < field.getHeight(); j++) {
         double foxProb = rand.nextDouble();
         if (foxProb <= FOX_CREATION_PROBABILITY) {
-          Fox fox = new Fox(field, new Location(i, j));
-          field.place(fox, new Location(i, j));
+          Location currentLocation = new Location(i, j);
+          Animal fox = new Fox(this.field, currentLocation);
+          this.field.place(fox, currentLocation);
         } else {
           double rabbitProb = rand.nextDouble();
           if (rabbitProb <= RABBIT_CREATION_PROBABILITY) {
-            Rabbit rabbit = new Rabbit(field, new Location(i, j));
-            field.place(rabbit, new Location(i, j));
+            Animal rabbit = new Rabbit(field, new Location(i, j));
+            this.field.place(rabbit, new Location(i, j));
           }
         }
       }

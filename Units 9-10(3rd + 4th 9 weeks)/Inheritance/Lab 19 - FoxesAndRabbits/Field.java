@@ -5,7 +5,7 @@ import java.util.List;
 public class Field
 {    
 	private int height, width;
-	private Object[][] field;
+	private Animal[][] field;
 
 	/**
 	 * Represent a field of the given dimensions.
@@ -16,15 +16,15 @@ public class Field
 	{
 		this.height = height;
 		this.width = width;
-		this.field = new Object[height][width];
+		this.field = new Animal[height][width];
 	}
 
 	/** Empty the field */
 	public void clear()
 	{
-		for (int i = 0; i < field.length; i++){
-			for (int j = 0; j < field[i].length; j++){
-				field[i][j] = null;
+		for (int i = 0; i < this.field.length; i++){
+			for (int j = 0; j < this.field[i].length; j++){
+				this.field[i][j] = null;
 			}
 		}
 	}
@@ -37,8 +37,8 @@ public class Field
 	 * @param row Row coordinate of the location.
 	 * @param col Column coordinate of the location.
 	 */
-	public void place(Object animal, int row, int col){
-		field[row][col] = animal;
+	public void place(Animal animal, int row, int col){
+		this.field[row][col] = animal;
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class Field
 	 * @param animal The animal to be placed.
 	 * @param location Where to place the animal.
 	 */
-	public void place(Object animal, Location location){
+	public void place(Animal animal, Location location){
 		place(animal, location.getRow(), location.getCol());
 	}
 	
@@ -58,7 +58,7 @@ public class Field
 	 * @param newLocation Object's new location
 	 */
 	public void move(Location oldLocation, Location newLocation){
-		Object obj = getObjectAt(oldLocation);
+		Animal obj = getObjectAt(oldLocation);
 		place(obj, newLocation);
 		remove(oldLocation);
 	}
@@ -68,7 +68,7 @@ public class Field
 	 * @param location
 	 */
 	public void remove(Location location){
-		field[location.getRow()][location.getCol()] = null;
+		this.field[location.getRow()][location.getCol()] = null;
 	}
 	
 	/**
@@ -76,7 +76,7 @@ public class Field
 	 * @param location Where in the field.
 	 * @return The animal at the given location, or null if there is none.
 	 */
-	public Object getObjectAt(Location location)
+	public Animal getObjectAt(Location location)
 	{
 		return field[location.getRow()][location.getCol()];
 	}
@@ -87,9 +87,9 @@ public class Field
 	 * @param col The desired column.
 	 * @return The animal at the given location, or null if there is none.
 	 */
-	public Object getObjectAt(int row, int col)
+	public Animal getObjectAt(int row, int col)
 	{
-		return field[row][col];
+		return this.field[row][col];
 	}
 
 	/**
@@ -100,13 +100,12 @@ public class Field
 	 */
 	public List<Location> adjacentLocations(Location location){
 		List<Location> locations = new ArrayList<Location>();
-		int row = location.getRow();
-		int col = location.getCol();
-
-		for (int r = row - 1; r <= row + 1; r++){
-			for (int c = col - 1; c <= col + 1; c++){
-				if (r >= 0 && r < this.height && c >= 0 && c < this.width && !(r == row && c == col)){
-					locations.add(new Location(r, c));
+		int currentRow = location.getRow();
+		int currentCol = location.getCol();
+		for (int row = currentRow - 1; row <= currentRow + 1; row++){
+			for (int col = currentCol - 1; col <= currentCol + 1; col++){
+				if (row >= 0 && row < this.height && col >= 0 && col < this.width && !(row == currentRow && col == currentCol)){
+					locations.add(new Location(row, col));
 				}
 			}
 		}

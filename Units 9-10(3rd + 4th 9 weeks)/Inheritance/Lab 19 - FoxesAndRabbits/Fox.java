@@ -1,8 +1,7 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Fox {
+public class Fox extends Animal implements Actor {
 
   /* Characteristics shared by all foxes (static fields). */
 
@@ -13,11 +12,6 @@ public class Fox {
   private static final int RABBIT_FOOD_VALUE = 8;
 
   /* Individual characteristics (instance fields). */
-
-  private int age;
-  private boolean alive;
-  private Field field;
-  private Location location;
   private int foodLevel;
 
   /**
@@ -25,44 +19,34 @@ public class Fox {
    * and not hungry).
    */
   public Fox(Field field, Location location) {
-    this.field = field;
-    this.location = location;
-    this.age = 0;
+    super(field, location);
     this.foodLevel = Fox.RABBIT_FOOD_VALUE;
-    this.alive = true;
   }
 
-  /**
-   * This is what the fox does most of the time: it hunts for rabbits.
-   * In the process, it might breed, die of hunger, or die of old age.
-   */
-  public void hunt() {
+  @Override
+  public void act() {
     incrementAge();
     incrementHunger();
-    if (!alive) return;
+    if (!isActive()) {
+      super.setDead();
+    };
     int births = breed();
     for (int i = 0; i < births; i++) {
-      Location loc = field.freeAdjacentLocation(location);
+      Location loc = super.getField().freeAdjacentLocation(super.getLocation());
       if (loc != null) {
-        Fox young = new Fox(field, loc);
-        field.place(young, loc);
+        Fox fox = new Fox(super.getField(), loc);
+        super.getField().place(fox, loc);
       }
     }
     Location newLocation = findFood();
     if (newLocation != null) {
-      field.place(this, newLocation);
-      this.location = newLocation;
-      this.field.remove(this.location);
+      Location curr = super.getLocation();
+      super.getField().place(this, newLocation);
+      curr = newLocation;
+      remove();
     } else {
-      setDead();
+      super.setDead();
     }
-  }
-
-  /**
-   * Increase the age. This could result in the fox's death.
-   */
-  private void incrementAge() {
-    this.age++;
   }
 
   /**
@@ -70,15 +54,19 @@ public class Fox {
    */
   private void incrementHunger() {
     this.foodLevel--;
-    if (this.foodLevel < 0) {
-      this.setDead();
+    if (this.foodLevel <= 0) {
+      super.setDead();
     }
   }
 
-  /** Method called with a Fox is no longer alive */
-  public void setDead() {
-    this.alive = false;
-    this.field.remove(this.location);
+  @Override
+  public void remove(){
+    super.getField().remove(super.getLocation());
+  }
+
+  @Override
+  public boolean isActive(){
+    return super.getAlive();
   }
 
   /**
@@ -86,10 +74,10 @@ public class Fox {
    * @return Where food was found, or null if it wasn't.
    */
   private Location findFood() {
-    List<Location> adjacentLocations = field.adjacentLocations(this.location);
+    List<Location> adjacentLocations = super.getField().adjacentLocations(super.getLocation());
 
     for (Location where : adjacentLocations) { //look for Rabbits in adjacent locations
-      Object animal = field.getObjectAt(where);
+      Object animal = super.getField().getObjectAt(where);
 
       if (animal instanceof Rabbit) { //if this object is a rabbit...
         Rabbit rabbit = (Rabbit) animal;
@@ -121,6 +109,11 @@ public class Fox {
    * A fox can breed if it has reached breeding age.
    */
   private boolean canBreed() {
-    return this.age >= BREEDING_AGE;
+    return super.getAge() >= BREEDING_AGE;
+  }
+
+  @Override
+  public String toString() {
+    return "Fox, " + super.getAge() + " y/o, at " + super.getLocation();
   }
 }
