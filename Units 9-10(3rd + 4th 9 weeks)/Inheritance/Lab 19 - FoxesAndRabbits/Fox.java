@@ -6,7 +6,6 @@ public class Fox extends Animal implements Actor {
   /* Characteristics shared by all foxes (static fields). */
 
   private static final int BREEDING_AGE = 10;
-  private static final int MAX_AGE = 20;
   private static final double BREEDING_PROBABILITY = 0.17;
   private static final int MAX_LITTER_SIZE = 4;
   private static final int RABBIT_FOOD_VALUE = 8;
@@ -40,9 +39,8 @@ public class Fox extends Animal implements Actor {
     }
     Location newLocation = findFood();
     if (newLocation != null) {
-      Location curr = super.getLocation();
       super.getField().place(this, newLocation);
-      curr = newLocation;
+      super.setLocation(newLocation);
       remove();
     } else {
       super.setDead();

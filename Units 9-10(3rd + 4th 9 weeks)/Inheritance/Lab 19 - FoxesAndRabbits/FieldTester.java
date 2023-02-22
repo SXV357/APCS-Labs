@@ -2,14 +2,14 @@ public class FieldTester
 {
 	public static void main(String[] args) 
 	{
-		Field    field  = new Field(4, 4);
+		Field field  = new Field(4, 4);
 		
-		Location a      = new Location(0, 0); //initial rabbit location
-		Location b      = new Location(2, 2); //initial fox location
+		Location a = new Location(0, 0); //initial rabbit location
+		Location b = new Location(2, 2); //initial fox location
 		
-		Rabbit   rabbit = new Rabbit(field, a); 
+		Animal rabbit = new Rabbit(field, a); 
 		
-		Fox      fox    = new Fox(field, b);
+		Animal fox = new Fox(field, b);
 		         
 		field.place(rabbit, a); //place rabbit in field at <0, 0>
 		field.place(fox, b);    //place fox in field at <2, 2>
@@ -33,12 +33,12 @@ public class FieldTester
 		System.out.println(field); //rabbit should show in new location, be removed from old
 		
 		System.out.println("Rabbit runs:");
-		rabbit.act();
+		((Rabbit) rabbit).act();
 		
 		System.out.println(field); //rabbit should move to a free adjacent location
 		
 		System.out.println("Fox hunts:");
-		fox.act(); 
+		((Fox) fox).act(); 
 		
 		//fox should eat rabbit if rabbit moved near fox, otherwise move randomly
 		//  run multiple times to check

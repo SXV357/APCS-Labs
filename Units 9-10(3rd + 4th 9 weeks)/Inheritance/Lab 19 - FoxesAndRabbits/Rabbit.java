@@ -5,7 +5,6 @@ public class Rabbit extends Animal implements Actor {
   /* Characteristics shared by all rabbits (static fields). */
 
   private static final int BREEDING_AGE = 5;
-  // private static final int MAX_AGE = 15;
   private static final double BREEDING_PROBABILITY = 0.22;
   private static final int MAX_LITTER_SIZE = 6;
 
@@ -17,14 +16,6 @@ public class Rabbit extends Animal implements Actor {
   public Rabbit(Field field, Location location) {
     super(field, location); 
   }
-
-  // public Location getLocation() {
-  //   return this.location;
-  // }
-
-  // public void setLocation(Location location) {
-  //   this.location = location;
-  // }
 
   @Override
   public void act() {
@@ -40,9 +31,8 @@ public class Rabbit extends Animal implements Actor {
     }
     Location free = super.getField().freeAdjacentLocation(super.getLocation());
     if (free != null) {
-      Location curr = super.getLocation();
       super.getField().place(this, free);
-      curr = free;
+      super.setLocation(free);
       remove();
     } else {
       super.setDead();

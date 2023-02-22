@@ -76,7 +76,6 @@ public class Simulator {
       for (int i = 0; i < this.field.getWidth(); i++) {
         for (int j = 0; j < this.field.getHeight(); j++) {
           Location loc = new Location(i, j);
-          // Object current = this.field.getObjectAt(loc);
           Animal current = this.field.getObjectAt(loc);
           if (current instanceof Rabbit) {
             ((Rabbit) current).act();
@@ -120,8 +119,9 @@ public class Simulator {
         } else {
           double rabbitProb = rand.nextDouble();
           if (rabbitProb <= RABBIT_CREATION_PROBABILITY) {
-            Animal rabbit = new Rabbit(field, new Location(i, j));
-            this.field.place(rabbit, new Location(i, j));
+            Location current = new Location(i, j);
+            Animal rabbit = new Rabbit(this.field, current);
+            this.field.place(rabbit, current);
           }
         }
       }
