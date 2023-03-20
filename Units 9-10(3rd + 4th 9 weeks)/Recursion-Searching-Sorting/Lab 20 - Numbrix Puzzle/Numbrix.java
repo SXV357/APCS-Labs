@@ -32,6 +32,9 @@ public class Numbrix {
         if (num != 0) {
           this.used[num] = true;
         }
+        else {
+          this.used[num] = false;
+        }
       }
     }
     sc.close();
@@ -46,7 +49,10 @@ public class Numbrix {
   public void solve() {
     for (int r = 0; r < grid.length; r++) {
       for (int c = 0; c < grid[r].length; c++) {
-        recursiveSolve(r, c, 1);
+        // only solving if there's a 0 or 1 currently placed in that cell
+        if (grid[r][c] == 0 || grid[r][c] == 1) {
+          recursiveSolve(r, c, 1);
+        }
       }
     }
   }
@@ -60,26 +66,24 @@ public class Numbrix {
    * @param n the number to place in grid[r][c].
    */
   private void recursiveSolve(int r, int c, int n) {
-    if (r < 0 || r > grid.length - 1 || c < 0 || c > grid[0].length - 1) {
+    if (r < 0 || r >= grid.length || c < 0 || c >= grid[r].length) {
       return;
     }
     boolean zero = grid[r][c] == 0;
     if (zero && used[n]) {
       return;
     }
-    if (!zero && !used[n]) {
+    if (!zero && !(used[n])) {
       return;
     }
-
     grid[r][c] = n;
-    if (n == grid.length * grid[0].length) {
+    if (n == (grid.length * grid[0].length)) {
       System.out.println(this);
-    }
-    else {
-      recursiveSolve(r - 1, c, n + 1);
-      recursiveSolve(r + 1, c, n + 1);
-      recursiveSolve(r, c - 1, n + 1);
-      recursiveSolve(r, c + 1, n + 1);
+    } else {
+      recursiveSolve(r - 1, c, n + 1); // up
+      recursiveSolve(r + 1, c, n + 1); // down
+      recursiveSolve(r, c - 1, n + 1); // left
+      recursiveSolve(r, c + 1, n + 1); // right
     }
     if (zero) {
       grid[r][c] = 0;
@@ -92,6 +96,7 @@ public class Numbrix {
    *         and a new line character after each row.
    *         '-' characters should replace 0s in the output.
    */
+  @Override
   public String toString() {
     String result = "";
     for (int i = 0; i < grid.length; i++) {

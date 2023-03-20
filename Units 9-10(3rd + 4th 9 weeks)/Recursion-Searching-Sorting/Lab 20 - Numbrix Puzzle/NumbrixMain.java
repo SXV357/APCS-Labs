@@ -8,7 +8,7 @@ public class NumbrixMain {
    */
   public static void main(String[] args) throws FileNotFoundException {
     Numbrix puzzle = new Numbrix("C:/Users/14058/OneDrive/Desktop/Programming/AP CS Projects/Units 9-10(3rd + 4th 9 weeks)/Recursion-Searching-Sorting/Lab 20 - Numbrix Puzzle/Data.txt");
-    // System.out.println(puzzle);
+    System.out.println(puzzle); // initial state of puzzle
     puzzle.solve();
   }
 }
