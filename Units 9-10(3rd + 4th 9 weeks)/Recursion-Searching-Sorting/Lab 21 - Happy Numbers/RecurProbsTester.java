@@ -1,8 +1,7 @@
+import java.util.ArrayList;
+
 public class RecurProbsTester {
     public static void main(String[] args){
-        System.out.println(RecurProbs.isPalindrome("a"));
-        System.out.println(RecurProbs.isPalindrome(""));
-
         System.out.println(RecurProbs.isPalindrome("racecar"));
         System.out.println(RecurProbs.isPalindrome("madam"));
         
@@ -29,10 +28,47 @@ public class RecurProbsTester {
 
         System.out.println(RecurProbs.wordWrap("hello, how are you doing today?", 13));
 
+        HappyNumber number = new HappyNumber(new ArrayList<Integer>());
+        System.out.println(number.isHappy(19));
+        System.out.println(number.isHappy(230));
+        System.out.println(number.isHappy(231));
+
+    }
+}
+
+class HappyNumber {
+
+    private ArrayList<Integer> nums;
+
+    public HappyNumber(ArrayList<Integer> nums){
+        this.nums = new ArrayList<Integer>();
     }
 
-    // Happy numbers problem
-    public boolean isHappy(int n){
-        return false;
+    // Client method
+    boolean isHappy(int n){
+        return this.isHappyRecursive(n);
+    }
+
+    // Helper methods
+    int nextInSeries(int prev){
+        int next = 0;
+        while (prev > 0){
+            next += Math.pow(prev % 10, 2);
+            prev /= 10;
+        }
+        return next;
+    }
+
+    boolean isHappyRecursive(int n){
+        if (n == 1){
+            return true;
+        }
+        if (nums.contains(n)){
+            return false;
+        }
+        else {
+            nums.add(n);
+            return isHappyRecursive(this.nextInSeries(n));
+        }
     }
 }

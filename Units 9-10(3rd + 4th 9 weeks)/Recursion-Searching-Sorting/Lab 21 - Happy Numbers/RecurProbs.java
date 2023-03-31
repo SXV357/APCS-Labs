@@ -116,8 +116,8 @@ class RecurProbs {
         }
     }
 
-    static void printPattern2(int n){
-        ArrayList<Integer> nums = new ArrayList<Integer>();
+      static ArrayList<Integer> nums = new ArrayList<Integer>();
+      static void printPattern2(int n){
         if (n < 0){
             System.out.print(n + " ");
             nums.add(n);
