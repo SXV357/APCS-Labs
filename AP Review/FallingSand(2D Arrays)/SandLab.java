@@ -7,18 +7,20 @@ public class SandLab {
   public static final int METAL = 1;
   public static final int SAND = 2;
   public static final int WATER = 3;
+  public static final int LAVA = 4;
 
   //do not add any more fields!
   private int[][] grid;
   private SandDisplay display; //SandDisplay is the GUI class
 
   public SandLab(int numRows, int numCols) {
-    String[] names = new String[4];
+    String[] names = new String[5];
 
     names[EMPTY] = "Empty";
     names[METAL] = "Metal";
     names[SAND] = "Sand";
     names[WATER] = "Water";
+    names[LAVA] = "Lava";
 
     display = new SandDisplay("Falling Sand", numRows, numCols, names);
     grid = new int[numRows][numCols];
@@ -46,6 +48,9 @@ public class SandLab {
           case WATER:
             display.setColor(i, j, new Color(0, 0, 255));
             break;
+          case LAVA:
+            display.setColor(i, j, new Color(207, 16, 32));
+            break;
         }
       }
     }
@@ -62,10 +67,38 @@ public class SandLab {
       randomCol <= grid[0].length - 1
     ) {
       int gridVal = grid[randomRow][randomCol];
-      if (!(gridVal == METAL) && randomRow != grid.length - 1) {
-        if (gridVal == SAND && grid[randomRow + 1][randomCol] == EMPTY) {
-          grid[randomRow + 1][randomCol] = SAND;
-          grid[randomRow][randomCol] = EMPTY;
+      if (!(gridVal == METAL)) {
+        if (
+          randomRow != grid.length - 1 &&
+          randomCol != 0 &&
+          randomCol != grid[0].length - 1
+        ) {
+          if (
+            gridVal == SAND &&
+            (
+              grid[randomRow + 1][randomCol] == EMPTY ||
+              grid[randomRow + 1][randomCol] == WATER
+            )
+          ) {
+            grid[randomRow + 1][randomCol] = SAND;
+            grid[randomRow][randomCol] = EMPTY;
+          }
+          if (gridVal == WATER) {
+            if (grid[randomRow + 1][randomCol] == EMPTY) {
+              grid[randomRow + 1][randomCol] = WATER;
+              grid[randomRow][randomCol] = EMPTY;
+            } else if (grid[randomRow][randomCol - 1] == EMPTY) {
+              grid[randomRow][randomCol - 1] = WATER;
+              grid[randomRow][randomCol] = EMPTY;
+            } else if (grid[randomRow][randomCol + 1] == EMPTY) {
+              grid[randomRow][randomCol + 1] = WATER;
+              grid[randomRow][randomCol] = EMPTY;
+            }
+          }
+          if (gridVal == LAVA && (grid[randomRow + 1][randomCol] == EMPTY || grid[randomRow + 1][randomCol] == SAND || grid[randomRow + 1][randomCol] == WATER)){
+            grid[randomRow + 1][randomCol] = LAVA;
+            grid[randomRow][randomCol] = EMPTY;
+          }
         }
       }
     }
