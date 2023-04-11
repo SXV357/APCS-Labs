@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 /**
  * EvilHangmanMain.java  06/04/2015
  *
@@ -7,7 +9,7 @@
  */
 public class EvilHangmanMain
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws FileNotFoundException
 	{
 		EvilHangman evil = new EvilHangman("C:/Users/14058/OneDrive/Desktop/Programming/AP CS Projects/AP Review/EvilHangman(Strings + ArrayList)/test.txt", true);
 		//EvilHangman evil = new EvilHangman("C:/Users/14058/OneDrive/Desktop/Programming/AP CS Projects/AP Review/EvilHangman(Strings + ArrayList)/dictionary.txt", false);

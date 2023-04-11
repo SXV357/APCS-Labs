@@ -24,6 +24,7 @@
      public Partition(String pattern, String word)
      {
         wordPattern = pattern;
+        wordList = new ArrayList<String>();
         wordList.add(word);
      }
  
