@@ -1,14 +1,3 @@
-/**
- * Partition.java  06/04/2015
- *
- * @author - Jane Doe
- * @author - Period n
- * @author - Id nnnnnnn
- *
- * @author - I received help from ...
- *
- */
-
  import java.util.List;
  import java.util.ArrayList;
  
@@ -23,7 +12,8 @@
       */
      public Partition(String pattern)
      {
- 
+        wordPattern = pattern;
+        wordList = new ArrayList<String>();
      }
  
      /**
@@ -33,7 +23,8 @@
       */
      public Partition(String pattern, String word)
      {
- 
+        wordPattern = pattern;
+        wordList.add(word);
      }
  
      /**
@@ -44,7 +35,11 @@
       */
      public boolean addIfMatches(String pattern, String word)
      {
-         return false;	// REPLACE
+        if (wordPattern.equals(pattern)){
+            wordList.add(word);
+            return true;
+        }
+        return false;
      }
  
      /**
@@ -52,7 +47,7 @@
       */
      public List<String> getWords()
      {
-         return null;	// REPLACE
+         return wordList;
      }
  
      /**
@@ -60,6 +55,13 @@
       */
      public int getPatternDashCount()
      {
-         return -999;	// REPLACE
+        char[] characters = wordPattern.toCharArray();
+        int count = 0;
+        for (int i = 0; i < characters.length; i++){
+            if (characters[i] == '-'){
+                count++;
+            }
+        }
+        return count;
      }
  }
