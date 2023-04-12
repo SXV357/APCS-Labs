@@ -23,7 +23,6 @@ public class EvilHangman {
   public EvilHangman(String fileName, boolean debug)
     throws FileNotFoundException {
     this.debug = debug;
-    Scanner in = new Scanner(System.in);
     inputWords(fileName);
     System.out.print("Number of guesses? ");
     this.remainingGuesses = in.nextInt();
@@ -46,7 +45,8 @@ public class EvilHangman {
    * @return the game status string.
    */
   public String toString() {
-    return null; // REPLACE
+	return debug ? "\n" + "Remaining guesses:" + remainingGuesses + "\n" + "Guessed letters:" + guessedLetters + "\n" + "Solution:" + solution + "\n" + "Remaining words:" + wordList.size() + "\n" : 
+	"\n" + "Remaining guesses:" + remainingGuesses + "\n" + "Guessed letters:" + guessedLetters + "\n" + "Solution:" + solution + "\n";
   }
 
   ////////// PRIVATE HELPER METHODS //////////
@@ -61,15 +61,15 @@ public class EvilHangman {
    */
   private void inputWords(String fileName) throws FileNotFoundException {
     this.wordList = new ArrayList<String>();
-    Scanner scanner = new Scanner(new File(fileName));
+    in = new Scanner(new File(fileName));
     while (this.wordList.isEmpty()) {
       System.out.print("Word length? ");
-      this.wordLength = scanner.nextInt();
-      while (scanner.hasNext()) {
+      this.wordLength = in.nextInt();
+      while (in.hasNext()) {
         wordList.add(
-          scanner.next().length() == this.wordLength
-            ? scanner.next()
-            : scanner.next()
+          in.next().length() == this.wordLength
+            ? in.next()
+            : in.next()
         );
       }
       if (this.wordList.isEmpty()) {
@@ -88,8 +88,17 @@ public class EvilHangman {
    * @return the single-letter string converted to upper-case.
    */
   private String inputLetter() {
-    return null; // REPLACE
-  }
+		while (true){
+			System.out.print("Next letter? ");
+			String letter = in.next().toUpperCase();
+			if (letter.compareTo("A") > 0 && "Z".compareTo(letter) < 0){
+				return letter;
+			}
+			else {
+				System.out.println("Invalid input!");
+			}
+		}
+	}
 
   /**
    * Helper method for getPartitionList:
@@ -102,7 +111,19 @@ public class EvilHangman {
    * @return the pattern
    */
   private String getPattern(String word, String letter) {
-    return null; // REPLACE
+    if (word.indexOf(letter) == -1){
+		return "-".repeat(word.length());
+	}
+	String modified = "";
+	for (int i = 0; i < word.length(); i++){
+		if (!(word.charAt(i) == letter.charAt(0))){
+			modified += "-";
+		}
+		else {
+			modified += letter;
+		}
+	}
+	return modified;
   }
 
   /**
@@ -113,7 +134,20 @@ public class EvilHangman {
    * @return the list of partitions.
    */
   private List<Partition> getPartitionList(String letter) {
-    return null; // REPLACE
+    ArrayList<Partition> partitions = new ArrayList<Partition>();
+	for (int i = 0; i < wordList.size(); i++){
+		String pattern = getPattern(wordList.get(i), letter);
+		for (int j = 0; j < partitions.size(); j++){
+			if (partitions.get(j).addIfMatches(pattern, wordList.get(i))){
+				partitions.get(j).getWords().add(wordList.get(i));
+			}
+			else {
+				Partition part = new Partition(pattern, wordList.get(i));
+				partitions.add(part);
+			}
+		}		
+	}
+	return partitions;
   }
 
   /**
@@ -125,7 +159,20 @@ public class EvilHangman {
    * 1) contains all of the partitions with the most words.
    * 2) does not contain any of the partitions with fewer than the most words.
    */
-  private void removeSmallerPartitions(List<Partition> partitions) {}
+  private void removeSmallerPartitions(List<Partition> partitions) {
+	int maxWords = 0;
+	for (int i = 0; i < partitions.size(); i++){
+		if (partitions.get(i).getWords().size() > maxWords){
+			maxWords = partitions.get(i).getWords().size();
+		}
+	}
+	for (int j = partitions.size() - 1; j >= 0; j--){
+		if (partitions.get(j).getWords().size() < maxWords){
+			partitions.remove(partitions.get(j));
+			j -= 1;
+		}
+	}
+  }
 
   /**
    * Helper method for playGame:
@@ -134,10 +181,16 @@ public class EvilHangman {
    * @param partitions the list of partitions.
    * @return the optimal partition.
    */
-  private List<String> getWordsFromOptimalPartition(
-    List<Partition> partitions
-  ) {
-    return null; // REPLACE
+  private List<String> getWordsFromOptimalPartition(List<Partition> partitions) {
+    int maxDashes = 0;
+	List<Partition> dash = new ArrayList<Partition>();
+	for (int k = 0; k < partitions.size(); k++){
+		if (partitions.get(k).getPatternDashCount() > maxDashes){
+			maxDashes = partitions.get(k).getPatternDashCount();
+			dash.add(partitions.get(k));
+		}
+	}
+	return dash.get(dash.size() - 1).getWords();
   }
 
   /**
