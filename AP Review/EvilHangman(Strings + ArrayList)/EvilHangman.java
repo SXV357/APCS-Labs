@@ -28,7 +28,7 @@ public class EvilHangman {
     this.remainingGuesses = in.nextInt();
     this.solution = "-".repeat(this.wordLength);
     this.guessedLetters = this.solution;
-    in.close();
+    // in.close();
   }
 
   /**
@@ -37,7 +37,29 @@ public class EvilHangman {
    * Game status is printed each turn and winning / losing
    * information is printed at the conclusion of the game.
    */
-  public void playGame() {}
+  public void playGame() {
+	while (remainingGuesses > 0 && solution.indexOf("-") != -1){
+		System.out.println(this);
+		String nextLetter = inputLetter();
+		guessedLetters += nextLetter;
+		ArrayList<Partition> collection = getPartitionList(nextLetter);
+		removeSmallerPartitions(collection);
+		wordList = getWordsFromOptimalPartition(collection);
+		String currentSolution = solution;
+		substitute(wordList.get(0), nextLetter);
+		if (currentSolution == solution){
+			remainingGuesses--;
+		}
+	}
+	if (remainingGuesses != 0){
+		System.out.println("You win, congratulations!");
+	}
+	else {
+		System.out.println("You lose, sorry!");
+	}
+	int randomIndex = (int) Math.floor(Math.random() * wordList.size());
+	System.out.println( "The word was \"" + wordList.get(randomIndex) + "\"");
+  }
 
   /**
    * Creates and returns a status string that indicates the
@@ -61,15 +83,16 @@ public class EvilHangman {
    */
   private void inputWords(String fileName) throws FileNotFoundException {
     this.wordList = new ArrayList<String>();
-    in = new Scanner(new File(fileName));
+    Scanner scanner = new Scanner(new File(fileName));
+	in = new Scanner(System.in);
     while (this.wordList.isEmpty()) {
       System.out.print("Word length? ");
       this.wordLength = in.nextInt();
-      while (in.hasNext()) {
+      while (scanner.hasNext()) {
         wordList.add(
-          in.next().length() == this.wordLength
-            ? in.next()
-            : in.next()
+          scanner.next().length() == this.wordLength
+            ? scanner.next()
+            : scanner.next()
         );
       }
       if (this.wordList.isEmpty()) {
@@ -88,6 +111,7 @@ public class EvilHangman {
    * @return the single-letter string converted to upper-case.
    */
   private String inputLetter() {
+		in = new Scanner(System.in);
 		while (true){
 			System.out.print("Next letter? ");
 			String letter = in.next().toUpperCase();
@@ -133,7 +157,7 @@ public class EvilHangman {
    *        each word in wordList.
    * @return the list of partitions.
    */
-  private List<Partition> getPartitionList(String letter) {
+  private ArrayList<Partition> getPartitionList(String letter) {
     ArrayList<Partition> partitions = new ArrayList<Partition>();
 	for (int i = 0; i < wordList.size(); i++){
 		String pattern = getPattern(wordList.get(i), letter);
@@ -159,7 +183,7 @@ public class EvilHangman {
    * 1) contains all of the partitions with the most words.
    * 2) does not contain any of the partitions with fewer than the most words.
    */
-  private void removeSmallerPartitions(List<Partition> partitions) {
+  private void removeSmallerPartitions(ArrayList<Partition> partitions) {
 	int maxWords = 0;
 	for (int i = 0; i < partitions.size(); i++){
 		if (partitions.get(i).getWords().size() > maxWords){
@@ -169,7 +193,7 @@ public class EvilHangman {
 	for (int j = partitions.size() - 1; j >= 0; j--){
 		if (partitions.get(j).getWords().size() < maxWords){
 			partitions.remove(partitions.get(j));
-			j -= 1;
+			j += 1;
 		}
 	}
   }
@@ -181,7 +205,7 @@ public class EvilHangman {
    * @param partitions the list of partitions.
    * @return the optimal partition.
    */
-  private List<String> getWordsFromOptimalPartition(List<Partition> partitions) {
+  private List<String> getWordsFromOptimalPartition(ArrayList<Partition> partitions) {
     int maxDashes = 0;
 	List<Partition> dash = new ArrayList<Partition>();
 	for (int k = 0; k < partitions.size(); k++){
@@ -201,5 +225,15 @@ public class EvilHangman {
    * @param found the string to check for occurances of letter.
    * @param letter the letter to check for in found.
    */
-  private void substitute(String found, String letter) {}
+  private void substitute(String found, String letter) {
+	for (int i = 0; i < found.length(); i++){
+		if (found.charAt(i) == letter.charAt(0)){
+			solution += letter;
+		}
+		else {
+			char prevChar = solution.charAt(i);
+			solution += Character.toString(prevChar);
+		}
+	}
+  }
 }
